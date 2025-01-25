@@ -1,7 +1,5 @@
 # Solana Agent
 
-[![Solana Swarm](https://cdn.cometheart.com/solana-agent-logo.jpg)](https://solana-agent.com)
-
 ## Why Solana Agent
 
 ### Batteries Included
@@ -26,7 +24,7 @@
 ## Local Dev
 
 ###  Run locally on Mac or Linux
-* Clone this repo - `git clone https://github.com/truemagic-coder/solana-agent`
+* Clone this repo - `git clone https://github.com/rizzolib/Solana-AI-agent`
 * Ensure the latest LTS Node is installed with yarn
 * Ensure Python 3.12.7 is installed with poetry
 * Ensure Docker and Docker Compose are installed
@@ -65,9 +63,3 @@
 ## Production Apps
 * [WB AI Agent](https://ai.walletbubbles.com)
 * [Solana Agent X Bot](https://solana-agent.com)
-
-## Contributing
-Contributions to Solana Agent are welcome! Please feel free to submit a Pull Request.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
