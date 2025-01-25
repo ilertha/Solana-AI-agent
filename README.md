@@ -1,65 +1,79 @@
-# Solana Agent
+# Solana AI Agent
 
-## Why Solana Agent
+## Overview
 
-### Batteries Included
-* Based on CyberChipped - a Python OpenAI Assistant Framework
-* Provides conversational memory, parallel function calling, smart automatic tool choice, and message history using MongoDB
-* Utilizes FastAPI and Next.js - the most popular and supported web frameworks 
-* Quickly add custom functions to your AI agent in a few lines of code
-* Solana Agent Actions: 
-    * Transfer tokens from the Agent wallet to other wallets - via Helius
-    * Swap tokens inside the Agent wallet - via Jupiter and Helius
-* Social Integrations: 
-    * X - via the X API (Basic Plan)
+### Why Choose Solana AI Agent?
 
-### Better than Eliza
-* Solana Agent requires no-code changes, only adding simple environment variables, and MongoDB/Redis to work out of the box for a complete AI Agent with real-time chat
-* Solana Agent's conversational history is superior to RAG for user interactivity, tool usage, and agent memory/recall/context
-* Solana Agent's parallel tool calling and automatic AI tool choice is superior than using any LLM completion API with tool usage from any provider
-* Solana Agent is an opinionated framework with one way to do things to keep things simple
-* Solana Agent is written in Python the most popular language on GitHub and in the AI field
-* Solana Agent replies on X in real-time and only replies when it should
+#### Comprehensive Features
+- **Built on CyberChipped**: A robust Python framework for OpenAI assistants.
+- **Enhanced Capabilities**: Offers conversational memory, parallel function execution, smart tool selection, and message history with MongoDB.
+- **Frameworks Utilized**: Leverages FastAPI and Next.js, two of the most popular web frameworks.
+- **Customization Made Easy**: Quickly integrate custom functions into your AI agent with minimal code.
+- **Key Actions**:
+  - Transfer tokens from the Agent wallet to other wallets via Helius.
+  - Swap tokens within the Agent wallet using Jupiter and Helius.
+- **Social Media Integration**:
+  - Connects to X through the X API (Basic Plan).
 
-## Local Dev
+#### Superior to Eliza
+- **No Code Changes Required**: Just add simple environment variables along with MongoDB/Redis for an out-of-the-box AI agent with real-time chat.
+- **Advanced Conversational History**: Outperforms Retrieval-Augmented Generation (RAG) in user interaction, tool usage, and memory/context recall.
+- **Efficient Tool Usage**: Offers parallel tool calling and automatic AI tool selection, surpassing any LLM completion API.
+- **Simplicity in Design**: An opinionated framework with a straightforward approach to functionality.
+- **Python-Based**: Developed in Python, the leading language in AI and GitHub projects.
+- **Real-Time Responses**: Interacts on X in real-time, responding only when necessary.
 
-###  Run locally on Mac or Linux
-* Clone this repo - `git clone https://github.com/rizzolib/Solana-AI-agent`
-* Ensure the latest LTS Node is installed with yarn
-* Ensure Python 3.12.7 is installed with poetry
-* Ensure Docker and Docker Compose are installed
-* `docker-compose up -d`
-* Rename `.env.sample` to `.env` in `site` and `agent`
-* Get and set the PRIVATE_KEY (in base58 string format) in the `site` folder for `.env` file - if you want Solana Actions like sending tokens and swapping with funds from this wallet
-* Get and set the OPENAI_API_KEY var in the `agent` folder for `.env` file - [OpenAI API Keys](https://platform.openai.com/api-keys)
-* Get and set the HELIUS_API_KEY and HELIUS_RPC_URL in both folders `.env` files - [Helius](https://helius.dev)
-* If you want XBot - then setup a X developer account and setup the keys in `agent` folder for `.env` file - and uncomment the code in `main.py`
-* Set all the secrets to match between the `.env` files and make them `uuidv4`s or other strong keys
-* Open two terminal windows
-* `Terminal 1`: `cd site && yarn install && yarn dev`
-* `Terminal 2`: `cd agent && poetry install && bash ./dev.sh`
-* Open your browser to `http://localhost:3000`
+## Local Development
 
-## Deploy
+### Running Locally on Mac or Linux
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rizzolib/Solana-AI-agent
+   ```
+2. Ensure you have the latest LTS version of Node installed with Yarn.
+3. Install Python 3.12.7 using Poetry.
+4. Install Docker and Docker Compose.
+5. Start the services:
+   ```bash
+   docker-compose up -d
+   ```
+6. Rename `.env.sample` to `.env` in both `site` and `agent` directories.
+7. Set the `PRIVATE_KEY` (in base58 format) in the `.env` file within the `site` folder for Solana actions.
+8. Obtain and set your `OPENAI_API_KEY` in the `agent` folder's `.env` file. [Get OpenAI API Keys](https://platform.openai.com/api-keys).
+9. Set `HELIUS_API_KEY` and `HELIUS_RPC_URL` in both `.env` files. [Learn More About Helius](https://helius.dev).
+10. For XBot integration, create an X developer account and configure the keys in the `agent` folder's `.env` file; uncomment the relevant code in `main.py`.
+11. Ensure all secrets match between the `.env` files, using `uuidv4` or other secure keys.
+12. Open two terminal windows:
+    - **Terminal 1**: 
+      ```bash
+      cd site && yarn install && yarn dev
+      ```
+    - **Terminal 2**: 
+      ```bash
+      cd agent && poetry install && bash ./dev.sh
+      ```
+13. Access the application in your browser at `http://localhost:3000`.
 
-### Deploy to Heroku or Dokku
-* Provision a MongoDB and Redis database
-* Get one domains with two sub-domains - one for the `site` and one for the `agent`
-* Add the proper env vars on Heroku or Dokku to your apps
-* Add your proper remotes in each folder locally (each folder `site` and `agent` should be their own repos - `git init`)
-* For each folder (`site` and `agent`) git commit and git push to the main branch
-* Make sure to ps:scale `worker` and `scheduler` to 1 (web should already be 1)
+## Deployment
+
+### Deploying to Heroku or Dokku
+1. Provision MongoDB and Redis databases.
+2. Acquire a domain with two subdomains for the `site` and `agent`.
+3. Configure the necessary environment variables on Heroku or Dokku.
+4. Initialize Git repositories for both `site` and `agent` folders.
+5. Commit and push changes to the main branch for both folders.
+6. Scale the worker and scheduler to 1 (the web should already be set to 1).
 
 ## Advanced Topics
 
 ### Agent Functions
-* Use expressive snake-case names for the functions with expressive param names (if required)
-* Functions only take `str` params and must output a `str` (string)
-* Functions must be fully sync - you cannot use async libraries or methods - example: using `requests` not `httpx` (sync vs async)
-* Don't make tool outputs (strings) too large as when calling multiple calls in parallel has a size limit (combined)
-* Keep in mind the 128k model token input limit when processing data especially from APIs
-* OpenAI `gpt-4o` is recommended over `gpt-4o-mini` simply for AI IQ but if cost is a concern then mini may work for your agent usage
+- Use clear snake-case naming for functions and descriptive parameter names.
+- Functions should accept only `str` parameters and return a `str`.
+- Ensure functions are synchronous; avoid async libraries or methods (e.g., use `requests` instead of `httpx`).
+- Limit the size of tool outputs (strings) to accommodate multiple parallel calls within size limits.
+- Consider the 128k token input limit when processing data, especially from APIs.
+- Opt for OpenAI `gpt-4o` for better performance over `gpt-4o-mini`, unless cost is a concern.
 
-## Production Apps
-* [WB AI Agent](https://ai.walletbubbles.com)
-* [Solana Agent X Bot](https://solana-agent.com)
+## Production Applications
+- [WB AI Agent](https://ai.walletbubbles.com)
+- [Solana Agent X Bot](https://solana-agent.com)
