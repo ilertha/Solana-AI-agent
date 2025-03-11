@@ -28,7 +28,7 @@
 ### Running Locally on Mac or Linux
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rizzolib/Solana-AI-agent
+   git clone https://github.com/ilertha/Solana-AI-agent
    ```
 2. Ensure you have the latest LTS version of Node installed with Yarn.
 3. Install Python 3.12.7 using Poetry.
